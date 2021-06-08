@@ -10,10 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_230301) do
+ActiveRecord::Schema.define(version: 2021_06_08_125537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string "provider"
+    t.string "title"
+    t.integer "duration"
+    t.string "provider_url"
+    t.integer "hours_per_week"
+    t.float "cost"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "topic_tracks", force: :cascade do |t|
+    t.bigint "topic_id", null: false
+    t.bigint "track_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["topic_id"], name: "index_topic_tracks_on_topic_id"
+    t.index ["track_id"], name: "index_topic_tracks_on_track_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "topic_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.string "track_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,4 +75,6 @@ ActiveRecord::Schema.define(version: 2021_06_07_230301) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "topic_tracks", "topics"
+  add_foreign_key "topic_tracks", "tracks"
 end

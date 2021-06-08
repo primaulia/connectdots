@@ -1,6 +1,9 @@
 require 'faker'
 
 User.destroy_all
+Topic.destroy_all
+Track.destroy_all
+TopicTrack.destroy_all
 
 current_role = [
   'Supervisor', 
@@ -79,3 +82,37 @@ k = 0
    
   i += 1
 end
+
+
+# Front-end WebDev: JS, Elm, Typescript
+# Back-end WebDev: JS, Scala, Python, Go, Ruby
+# Mobile Dev: Swift, Java, Objective C, JS
+# Game Dev: Unity, Typescript
+# Desktop App: Scala, Go, Python
+# Systems Programming: Go, Rust
+
+@topics = ["HTML", "CSS", "Javascript", "Ruby", "Unity", "Python", "Scala", "Go", "Rust", "Objective C", "Typescript", "Elm", "Java", "Swift"]
+
+@topics.each do |topic|
+  Topic.create!(
+    topic_name: topic,
+  )
+end
+
+@tracks = ["Front-end Web Development", "Back-end Web Development", "Mobile Development", "Game Development", "Desktop Application", "Systems Programming"]
+
+@tracks.each do |track|
+  Track.create!(
+    track_name: track,
+  )
+end
+
+TopicTrack.create!(
+  track_id: 1,
+  topic_id: [3, 11, 12]
+)
+
+TopicTrack.create!(
+  track_id: 2,
+  topic_id: [3, 4, 6, 7, 9]
+)
