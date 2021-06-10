@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def editprofile
   end
-  
+
   def new
     @user = User.new
   end
